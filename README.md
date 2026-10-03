@@ -105,45 +105,45 @@ Job=.NET 10.0  Runtime=.NET 10.0  Toolchain=net10.0
 <details>
 <summary>Complex, reflection based</summary>
 
-| Method                             | json          | Mean     | Error     | StdDev    | Ratio | Gen0     | Gen1    | Allocated | Alloc Ratio |
-|----------------------------------- |-------------- |---------:|----------:|----------:|------:|---------:|--------:|----------:|------------:|
-| ComplexReflection                  | Byte[1872295] | 3.323 ms | 0.0156 ms | 0.0146 ms |  1.00 | 148.4375 | 78.1250 |   2.24 MB |        1.00 |
-| **ComplexReflectionWithJsonGuard** | Byte[1872295] | 3.310 ms | 0.0143 ms | 0.0134 ms |  1.00 | 148.4375 | 78.1250 |   2.24 MB |        1.00 |
-| ComplexReflectionWithJsonRequired  | Byte[1872295] | 3.632 ms | 0.0214 ms | 0.0200 ms |  1.09 | 175.7813 | 93.7500 |   2.64 MB |        1.18 |
-| ComplexReflectionWithRequired      | Byte[1872295] | 3.611 ms | 0.0253 ms | 0.0224 ms |  1.09 | 175.7813 | 93.7500 |   2.64 MB |        1.18 |
+| Method                             | json              | Mean         | Error         | StdDev        | Ratio    | Gen0         | Gen1        | Allocated   | Alloc Ratio |
+|----------------------------------- |------------------ |-------------:|--------------:|--------------:|---------:|-------------:|------------:|------------:|------------:|
+| ComplexReflection                  | Byte[1872295]     | 3.323 ms     | 0.0156 ms     | 0.0146 ms     | 1.00     | 148.4375     | 78.1250     | 2.24 MB     | 1.00        |
+| **ComplexReflectionWithJsonGuard** | **Byte[1872295]** | **3.310 ms** | **0.0143 ms** | **0.0134 ms** | **1.00** | **148.4375** | **78.1250** | **2.24 MB** | **1.00**    |
+| ComplexReflectionWithJsonRequired  | Byte[1872295]     | 3.632 ms     | 0.0214 ms     | 0.0200 ms     | 1.09     | 175.7813     | 93.7500     | 2.64 MB     | 1.18        |
+| ComplexReflectionWithRequired      | Byte[1872295]     | 3.611 ms     | 0.0253 ms     | 0.0224 ms     | 1.09     | 175.7813     | 93.7500     | 2.64 MB     | 1.18        |
 </details>
 
 <details>
 <summary>Complex, source generated</summary>
 
-| Method                            | json          | Mean     | Error     | StdDev    | Ratio | RatioSD | Gen0     | Gen1     | Allocated | Alloc Ratio |
-|---------------------------------- |-------------- |---------:|----------:|----------:|------:|--------:|---------:|---------:|----------:|------------:|
-| ComplexSourceGen                  | Byte[1872295] | 3.290 ms | 0.0159 ms | 0.0149 ms |  1.00 |    0.01 | 148.4375 | 125.0000 |   2.24 MB |        1.00 |
-| **ComplexSourceGenWithJsonGuard** | Byte[1872295] | 3.242 ms | 0.0159 ms | 0.0149 ms |  0.99 |    0.01 | 148.4375 | 125.0000 |   2.24 MB |        1.00 |
-| ComplexSourceGenWithJsonRequired  | Byte[1872295] | 3.504 ms | 0.0180 ms | 0.0160 ms |  1.07 |    0.01 | 175.7813 | 152.3438 |   2.64 MB |        1.18 |
-| ComplexSourceGenWithRequired      | Byte[1872295] | 6.489 ms | 0.0569 ms | 0.0532 ms |  1.97 |    0.02 | 218.7500 | 187.5000 |   3.35 MB |        1.50 |
+| Method                            | json              | Mean         | Error         | StdDev        | Ratio    | RatioSD | Gen0         | Gen1         | Allocated   | Alloc Ratio |
+|---------------------------------- |------------------ |-------------:|--------------:|--------------:|---------:|--------:|-------------:|-------------:|------------:|------------:|
+| ComplexSourceGen                  | Byte[1872295]     | 3.290 ms     | 0.0159 ms     | 0.0149 ms     | 1.00     | 0.01    | 148.4375     | 125.0000     | 2.24 MB     | 1.00        |
+| **ComplexSourceGenWithJsonGuard** | **Byte[1872295]** | **3.242 ms** | **0.0159 ms** | **0.0149 ms** | **0.99** | **0.01**| **148.4375** | **125.0000** | **2.24 MB** | **1.00**    |
+| ComplexSourceGenWithJsonRequired  | Byte[1872295]     | 3.504 ms     | 0.0180 ms     | 0.0160 ms     | 1.07     | 0.01    | 175.7813     | 152.3438     | 2.64 MB     | 1.18        |
+| ComplexSourceGenWithRequired      | Byte[1872295]     | 6.489 ms     | 0.0569 ms     | 0.0532 ms     | 1.97     | 0.02    | 218.7500     | 187.5000     | 3.35 MB     | 1.50        |
 </details>
 
 <details>
 <summary>Simple, reflection based</summary>
 
-| Method                            | json      | Mean     | Error     | StdDev    | Ratio | Gen0   | Allocated | Alloc Ratio |
-|---------------------------------- |---------- |---------:|----------:|----------:|------:|-------:|----------:|------------:|
-| SimpleReflection                  | Byte[909] | 2.068 μs | 0.0155 μs | 0.0145 μs |  1.00 | 0.1640 |   2.55 KB |        1.00 |
-| **SimpleReflectionWithJsonGuard** | Byte[909] | 2.155 μs | 0.0257 μs | 0.0228 μs |  1.04 | 0.1640 |   2.55 KB |        1.00 |
-| SimpleReflectionWithJsonRequired  | Byte[909] | 2.256 μs | 0.0148 μs | 0.0138 μs |  1.09 | 0.1907 |   2.93 KB |        1.15 |
-| SimpleReflectionWithRequired      | Byte[909] | 2.271 μs | 0.0229 μs | 0.0214 μs |  1.10 | 0.1907 |   2.93 KB |        1.15 |
+| Method                            | json          | Mean         | Error         | StdDev        | Ratio    | Gen0       | Allocated   | Alloc Ratio |
+|---------------------------------- |-------------- |-------------:|--------------:|--------------:|---------:|-----------:|------------:|------------:|
+| SimpleReflection                  | Byte[909]     | 2.068 μs     | 0.0155 μs     | 0.0145 μs     | 1.00     | 0.1640     | 2.55 KB     | 1.00        |
+| **SimpleReflectionWithJsonGuard** | **Byte[909]** | **2.155 μs** | **0.0257 μs** | **0.0228 μs** | **1.04** | **0.1640** | **2.55 KB** | **1.00**    |
+| SimpleReflectionWithJsonRequired  | Byte[909]     | 2.256 μs     | 0.0148 μs     | 0.0138 μs     | 1.09     | 0.1907     | 2.93 KB     | 1.15        |
+| SimpleReflectionWithRequired      | Byte[909]     | 2.271 μs     | 0.0229 μs     | 0.0214 μs     | 1.10     | 0.1907     | 2.93 KB     | 1.15        |
 </details>
 
 <details>
 <summary>Simple, source generated</summary>
 
-| Method                           | json      | Mean     | Error     | StdDev    | Ratio | Gen0   | Allocated | Alloc Ratio |
-|--------------------------------- |---------- |---------:|----------:|----------:|------:|-------:|----------:|------------:|
-| SimpleSourceGen                  | Byte[909] | 2.094 μs | 0.0135 μs | 0.0126 μs |  1.00 | 0.1640 |   2.55 KB |        1.00 |
-| **SimpleSourceGenWithJsonGuard** | Byte[909] | 2.082 μs | 0.0195 μs | 0.0183 μs |  0.99 | 0.1640 |   2.55 KB |        1.00 |
-| SimpleSourceGenWithJsonRequired  | Byte[909] | 2.242 μs | 0.0199 μs | 0.0186 μs |  1.07 | 0.1907 |   2.93 KB |        1.15 |
-| SimpleSourceGenWithRequired      | Byte[909] | 2.890 μs | 0.0249 μs | 0.0233 μs |  1.38 | 0.2251 |   3.45 KB |        1.35 |
+| Method                           | json          | Mean         | Error         | StdDev        | Ratio    | Gen0       | Allocated   | Alloc Ratio |
+|--------------------------------- |-------------- |-------------:|--------------:|--------------:|---------:|-----------:|------------:|------------:|
+| SimpleSourceGen                  | Byte[909]     | 2.094 μs     | 0.0135 μs     | 0.0126 μs     | 1.00     | 0.1640     | 2.55 KB     | 1.00        |
+| **SimpleSourceGenWithJsonGuard** | **Byte[909]** | **2.082 μs** | **0.0195 μs** | **0.0183 μs** | **0.99** | **0.1640** | **2.55 KB** | **1.00**    |
+| SimpleSourceGenWithJsonRequired  | Byte[909]     | 2.242 μs     | 0.0199 μs     | 0.0186 μs     | 1.07     | 0.1907     | 2.93 KB     | 1.15        |
+| SimpleSourceGenWithRequired      | Byte[909]     | 2.890 μs     | 0.0249 μs     | 0.0233 μs     | 1.38     | 0.2251     | 3.45 KB     | 1.35        |
 </details>
 
 #### Native AOT
@@ -166,23 +166,23 @@ Job=NativeAOT 10.0  Runtime=NativeAOT 10.0  Toolchain=Latest ILCompiler
 <details>
 <summary>Complex, source generated</summary>
 
-| Method                            | json          | Mean     | Error     | StdDev    | Ratio | RatioSD | Gen0     | Gen1     | Allocated | Alloc Ratio |
-|---------------------------------- |-------------- |---------:|----------:|----------:|------:|--------:|---------:|---------:|----------:|------------:|
-| ComplexSourceGen                  | Byte[1872295] | 4.794 ms | 0.0580 ms | 0.0543 ms |  1.00 |    0.02 | 148.4375 | 109.3750 |   2.24 MB |        1.00 |
-| **ComplexSourceGenWithJsonGuard** | Byte[1872295] | 4.815 ms | 0.0298 ms | 0.0279 ms |  1.00 |    0.01 | 148.4375 | 109.3750 |   2.24 MB |        1.00 |
-| ComplexSourceGenWithJsonRequired  | Byte[1872295] | 4.996 ms | 0.0457 ms | 0.0428 ms |  1.04 |    0.01 | 171.8750 | 164.0625 |   2.64 MB |        1.18 |
-| ComplexSourceGenWithRequired      | Byte[1872295] | 8.106 ms | 0.0551 ms | 0.0515 ms |  1.69 |    0.02 | 218.7500 | 171.8750 |   3.35 MB |        1.50 |
+| Method                            | json              | Mean         | Error         | StdDev        | Ratio    | RatioSD | Gen0         | Gen1         | Allocated   | Alloc Ratio |
+|---------------------------------- |------------------ |-------------:|--------------:|--------------:|---------:|--------:|-------------:|-------------:|------------:|------------:|
+| ComplexSourceGen                  | Byte[1872295]     | 4.794 ms     | 0.0580 ms     | 0.0543 ms     | 1.00     | 0.02    | 148.4375     | 109.3750     | 2.24 MB     | 1.00        |
+| **ComplexSourceGenWithJsonGuard** | **Byte[1872295]** | **4.815 ms** | **0.0298 ms** | **0.0279 ms** | **1.00** | **0.01**| **148.4375** | **109.3750** | **2.24 MB** | **1.00**    |
+| ComplexSourceGenWithJsonRequired  | Byte[1872295]     | 4.996 ms     | 0.0457 ms     | 0.0428 ms     | 1.04     | 0.01    | 171.8750     | 164.0625     | 2.64 MB     | 1.18        |
+| ComplexSourceGenWithRequired      | Byte[1872295]     | 8.106 ms     | 0.0551 ms     | 0.0515 ms     | 1.69     | 0.02    | 218.7500     | 171.8750     | 3.35 MB     | 1.50        |
 </details>
 
 <details>
 <summary>Simple, source generated</summary>
 
-| Method                           | json      | Mean     | Error     | StdDev    | Ratio | Gen0   | Allocated | Alloc Ratio |
-|--------------------------------- |---------- |---------:|----------:|----------:|------:|-------:|----------:|------------:|
-| SimpleSourceGen                  | Byte[909] | 3.032 μs | 0.0252 μs | 0.0236 μs |  1.00 | 0.1640 |   2.55 KB |        1.00 |
-| **SimpleSourceGenWithJsonGuard** | Byte[909] | 3.057 μs | 0.0114 μs | 0.0107 μs |  1.01 | 0.1640 |   2.55 KB |        1.00 |
-| SimpleSourceGenWithJsonRequired  | Byte[909] | 3.186 μs | 0.0177 μs | 0.0165 μs |  1.05 | 0.1907 |   2.93 KB |        1.15 |
-| SimpleSourceGenWithRequired      | Byte[909] | 3.961 μs | 0.0263 μs | 0.0246 μs |  1.31 | 0.2213 |   3.45 KB |        1.35 |
+| Method                           | json          | Mean         | Error         | StdDev        | Ratio    | Gen0       | Allocated   | Alloc Ratio |
+|--------------------------------- |-------------- |-------------:|--------------:|--------------:|---------:|-----------:|------------:|------------:|
+| SimpleSourceGen                  | Byte[909]     | 3.032 μs     | 0.0252 μs     | 0.0236 μs     | 1.00     | 0.1640     | 2.55 KB     | 1.00        |
+| **SimpleSourceGenWithJsonGuard** | **Byte[909]** | **3.057 μs** | **0.0114 μs** | **0.0107 μs** | **1.01** | **0.1640** | **2.55 KB** | **1.00**    |
+| SimpleSourceGenWithJsonRequired  | Byte[909]     | 3.186 μs     | 0.0177 μs     | 0.0165 μs     | 1.05     | 0.1907     | 2.93 KB     | 1.15        |
+| SimpleSourceGenWithRequired      | Byte[909]     | 3.961 μs     | 0.0263 μs     | 0.0246 μs     | 1.31     | 0.2213     | 3.45 KB     | 1.35        |
 </details>
 
 ## License
