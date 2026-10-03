@@ -132,10 +132,10 @@ Job=.NET 10.0  Runtime=.NET 10.0  Toolchain=net10.0
 
 | Method                            | json          | Mean         | Error         | StdDev        | Ratio    | Gen0       | Allocated   | Alloc Ratio |
 |---------------------------------- |-------------- |-------------:|--------------:|--------------:|---------:|-----------:|------------:|------------:|
-| SimpleReflection                  | Byte[909]     | 2.146 us     | 0.0176 us     | 0.0165 us     | 1.00     | 0.1640     | 2.55 KB     | 1.00        |
-| **SimpleReflectionWithJsonGuard** | **Byte[909]** | **2.132 us** | **0.0111 us** | **0.0104 us** | **0.99** | **0.1640** | **2.55 KB** | **1.00**    |
-| SimpleReflectionWithJsonRequired  | Byte[909]     | 2.247 us     | 0.0098 us     | 0.0076 us     | 1.05     | 0.1907     | 2.93 KB     | 1.15        |
-| SimpleReflectionWithRequired      | Byte[909]     | 2.275 us     | 0.0177 us     | 0.0166 us     | 1.06     | 0.1907     | 2.93 KB     | 1.15        |
+| SimpleReflection                  | Byte[909]     | 2.146 μs     | 0.0176 μs     | 0.0165 μs     | 1.00     | 0.1640     | 2.55 KB     | 1.00        |
+| **SimpleReflectionWithJsonGuard** | **Byte[909]** | **2.132 μs** | **0.0111 μs** | **0.0104 μs** | **0.99** | **0.1640** | **2.55 KB** | **1.00**    |
+| SimpleReflectionWithJsonRequired  | Byte[909]     | 2.247 μs     | 0.0098 μs     | 0.0076 μs     | 1.05     | 0.1907     | 2.93 KB     | 1.15        |
+| SimpleReflectionWithRequired      | Byte[909]     | 2.275 μs     | 0.0177 μs     | 0.0166 μs     | 1.06     | 0.1907     | 2.93 KB     | 1.15        |
 </details>
 
 <details>
