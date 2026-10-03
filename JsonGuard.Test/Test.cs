@@ -237,6 +237,17 @@ public sealed class AbstractPropertyDerivedClassCounter2 : IAbstractPropertyDeri
 public partial class EmptyClass;
 #pragma warning restore JG0003 // No non-nullable reference type properties
 
+public class ParentClass
+{
+    public ChildClass? Child { get; set; }
+}
+
+[JsonGuard]
+public partial class ChildClass
+{
+    public string SomeProperty { get; set; }
+}
+
 [TestClass]
 public sealed class Test
 {
@@ -445,5 +456,13 @@ public sealed class Test
     public void TestEmptyClassIsIJsonOnDeserialized()
     {
         Assert.Contains(typeof(IJsonOnDeserialized), typeof(EmptyClass).GetInterfaces());
+    }
+
+    [TestMethod]
+    public void TestNestedClassGetsGurded()
+    {
+        var exception = Assert.ThrowsExactly<JsonException>(() => JsonSerializer.Deserialize<ParentClass>("""{"Child":{}}"""u8));
+
+        Assert.AreEqual("The member 'SomeProperty' cannot be null.", exception.Message);
     }
 }
