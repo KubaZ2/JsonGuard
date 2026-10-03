@@ -1,0 +1,102 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main" ]
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+      - "[0-9]+.[0-9]+.[0-9]+-*"
+
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-26.04
+    defaults:
+      run:
+        shell: nix develop -c bash -eo pipefail {0}
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # v31.11.1
+
+      - name: Setup dev environment
+        run: 'true'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build -c Release --no-restore --warnaserror
+
+      - name: Test
+        run: dotnet test -c Release --no-build --no-restore --verbosity normal
+
+      - name: Pack
+        run: dotnet pack JsonGuard -c Release --no-build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          if-no-files-found: error
+          archive: false
+          path: JsonGuard/bin/Release/JsonGuard.*.nupkg
+
+  publish:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-26.04
+    permissions:
+      contents: write
+    defaults:
+      run:
+        shell: nix develop -c bash -eo pipefail {0}
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # v31.11.1
+
+      - name: Setup dev environment
+        run: 'true'
+
+      - name: Download artifacts
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          pattern: JsonGuard.*.nupkg
+          path: artifacts
+          github-token: ${{ github.token }}
+
+      - name: Login to NuGet
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USERNAME }}
+
+      - name: Publish to NuGet
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: dotnet nuget push artifacts/JsonGuard.*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json --skip-duplicate
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          IS_PRERELEASE: ${{ contains(github.ref_name, '-') }}
+        run: |
+          FILES=(artifacts/JsonGuard.*.nupkg)
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" \
+              --clobber \
+              "${FILES[@]}"
+          else
+            gh release create "$TAG" \
+              --generate-notes \
+              --prerelease="$IS_PRERELEASE" \
+              "${FILES[@]}"
+          fi
