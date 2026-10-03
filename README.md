@@ -132,10 +132,10 @@ Job=.NET 10.0  Runtime=.NET 10.0  Toolchain=net10.0
 
 | Method                            | json          | Mean         | Error         | StdDev        | Ratio    | Gen0       | Allocated   | Alloc Ratio |
 |---------------------------------- |-------------- |-------------:|--------------:|--------------:|---------:|-----------:|------------:|------------:|
-| SimpleReflection                  | Byte[909]     | 2.068 μs     | 0.0155 μs     | 0.0145 μs     | 1.00     | 0.1640     | 2.55 KB     | 1.00        |
-| **SimpleReflectionWithJsonGuard** | **Byte[909]** | **2.155 μs** | **0.0257 μs** | **0.0228 μs** | **1.04** | **0.1640** | **2.55 KB** | **1.00**    |
-| SimpleReflectionWithJsonRequired  | Byte[909]     | 2.256 μs     | 0.0148 μs     | 0.0138 μs     | 1.09     | 0.1907     | 2.93 KB     | 1.15        |
-| SimpleReflectionWithRequired      | Byte[909]     | 2.271 μs     | 0.0229 μs     | 0.0214 μs     | 1.10     | 0.1907     | 2.93 KB     | 1.15        |
+| SimpleReflection                  | Byte[909]     | 2.146 us     | 0.0176 us     | 0.0165 us     | 1.00     | 0.1640     | 2.55 KB     | 1.00        |
+| **SimpleReflectionWithJsonGuard** | **Byte[909]** | **2.132 us** | **0.0111 us** | **0.0104 us** | **0.99** | **0.1640** | **2.55 KB** | **1.00**    |
+| SimpleReflectionWithJsonRequired  | Byte[909]     | 2.247 us     | 0.0098 us     | 0.0076 us     | 1.05     | 0.1907     | 2.93 KB     | 1.15        |
+| SimpleReflectionWithRequired      | Byte[909]     | 2.275 us     | 0.0177 us     | 0.0166 us     | 1.06     | 0.1907     | 2.93 KB     | 1.15        |
 </details>
 
 <details>
@@ -190,7 +190,7 @@ Job=NativeAOT 10.0  Runtime=NativeAOT 10.0  Toolchain=Latest ILCompiler
 
 ## What it is not
 
-Unlike [JsonRequired] and the required keyword, JsonGuard does not intercept the deserialization pipeline to check if a property was physically present in the JSON payload. Instead, it runs after deserialization is complete to verify that the final state of the object honors your C# nullability annotations.
+Unlike `[JsonRequired]` and the `required` keyword, JsonGuard does not intercept the deserialization pipeline to check if a property was physically present in the JSON payload. Instead, it runs after deserialization is complete to verify that the final state of the object honors your C# nullability annotations.
 
 For example, if an integer property is missing from the JSON, it defaults to 0 and JsonGuard ignores it (as it is a value type). However, if a non-nullable string property is missing, it defaults to null. JsonGuard detects this invalid state and throws an exception.
 
