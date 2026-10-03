@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="JsonGuard.Benchmarks/JsonGuard.Benchmarks.csproj" />
+  <Project Path="JsonGuard.Test/JsonGuard.Test.csproj" />
+  <Project Path="JsonGuard/JsonGuard.csproj" />
+</Solution>
