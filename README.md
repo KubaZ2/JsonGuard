@@ -7,7 +7,7 @@
   </p>
 </div>
 
-An efficient JSON validation library for System.Text.Json, based on Source Generation.
+An efficient, allocation free JSON validation library for System.Text.Json, based on Source Generation.
 
 ## Motivation
 
@@ -17,7 +17,7 @@ JsonGuard circumvents this overhead by using a Roslyn Source Generator to implem
 
 ## How it works
 
-When you define `[JsonGuard]` attribute on a class, the source generator will generate an implementation of `IJsonOnDeserialized` for that class. The generated implementation will check if all non-nullable properties are present in the JSON document during deserialization. If any required property is missing, a `JsonException` will be thrown.
+When you apply the `[JsonGuard]` attribute to a partial class, the source generator creates an implementation of `IJsonOnDeserialized`. This generated code runs immediately after deserialization completes, performing a highly optimized check to ensure no non-nullable reference type properties are null. If any are, a `JsonException` is thrown with the missing property information. Furthermore, because it relies on the standard `IJsonOnDeserialized` interface, System.Text.Json automatically triggers this validation regardless of whether the object is the root payload or deeply nested within the JSON document.
 
 ### Example
 
@@ -53,6 +53,8 @@ public partial class User : IJsonOnDeserialized
 }
 ```
 
+Additionally, JsonGuard suppresses nullability warnings for validated properties, so you won't get any warnings about potential null references for `Name` and `Email`.
+
 ## Installation
 
 Install the package via NuGet:
@@ -67,9 +69,12 @@ dotnet add package JsonGuard
 - Works with both reflection-based and source-generated serialization.
 - Skips nullable properties and value-type properties.
 - Automatically suppresses nullability warnings for validated properties.
-- Supports complex type hierarchies.
+- Supports deeply nested objects (validation runs at any depth in the JSON payload).
+- Supports complex type hierarchies (including inherited properties).
 - Supports classes, structs, records, and record structs.
 - Supports virtual and abstract properties without duplicating the validation logic.
+- Supports `[JsonConstructor]` and `init` properties.
+- Respects `[JsonIgnore]`, automatically skipping ignored properties.
 
 ## Benchmarks
 
@@ -184,6 +189,12 @@ Job=NativeAOT 10.0  Runtime=NativeAOT 10.0  Toolchain=Latest ILCompiler
 | SimpleSourceGenWithJsonRequired  | Byte[909]     | 3.186 μs     | 0.0177 μs     | 0.0165 μs     | 1.05     | 0.1907     | 2.93 KB     | 1.15        |
 | SimpleSourceGenWithRequired      | Byte[909]     | 3.961 μs     | 0.0263 μs     | 0.0246 μs     | 1.31     | 0.2213     | 3.45 KB     | 1.35        |
 </details>
+
+## What it is not
+
+Unlike [JsonRequired] and the required keyword, JsonGuard does not intercept the deserialization pipeline to check if a property was physically present in the JSON payload. Instead, it runs after deserialization is complete to verify that the final state of the object honors your C# nullability annotations.
+
+For example, if an integer property is missing from the JSON, it defaults to 0 and JsonGuard ignores it (as it is a value type). However, if a non-nullable string property is missing, it defaults to null. JsonGuard detects this invalid state and throws an exception.
 
 ## License
 
