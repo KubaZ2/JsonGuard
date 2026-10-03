@@ -23,28 +23,28 @@ public class SimpleDeserializeSourceGenBenchmark
 {
     [Benchmark(Baseline = true)]
     [ArgumentsSource(nameof(GetData))]
-    public PayloadNoChecks SourceGen(ReadOnlySpan<byte> json)
+    public PayloadNoChecks SimpleSourceGen(ReadOnlySpan<byte> json)
     {
         return JsonSerializer.Deserialize(json, SimpleNoChecksSerializerContext.Default.PayloadNoChecks)!;
     }
 
     [Benchmark]
     [ArgumentsSource(nameof(GetData))]
-    public PayloadJsonGuard SourceGenWithJsonGuard(ReadOnlySpan<byte> json)
+    public PayloadJsonGuard SimpleSourceGenWithJsonGuard(ReadOnlySpan<byte> json)
     {
         return JsonSerializer.Deserialize(json, SimpleJsonGuardSerializerContext.Default.PayloadJsonGuard)!;
     }
 
     [Benchmark]
     [ArgumentsSource(nameof(GetData))]
-    public PayloadJsonRequired SourceGenWithJsonRequired(ReadOnlySpan<byte> json)
+    public PayloadJsonRequired SimpleSourceGenWithJsonRequired(ReadOnlySpan<byte> json)
     {
         return JsonSerializer.Deserialize(json, SimpleJsonRequiredSerializerContext.Default.PayloadJsonRequired)!;
     }
 
     [Benchmark]
     [ArgumentsSource(nameof(GetData))]
-    public PayloadRequired SourceGenWithRequired(ReadOnlySpan<byte> json)
+    public PayloadRequired SimpleSourceGenWithRequired(ReadOnlySpan<byte> json)
     {
         return JsonSerializer.Deserialize(json, SimpleRequiredSerializerContext.Default.PayloadRequired)!;
     }

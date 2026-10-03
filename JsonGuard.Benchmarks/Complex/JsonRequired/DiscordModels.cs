@@ -1,21 +1,27 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace JsonGuard.Benchmarks.Discord.Required;
+namespace JsonGuard.Benchmarks.Complex.JsonRequired;
+
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
 public class JsonRole
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("name")]
-    public required string Name { get; set; }
+    [JsonRequired]
+    public string Name { get; set; }
 
     [JsonPropertyName("colors")]
-    public required JsonRoleColors Colors { get; set; }
+    [JsonRequired]
+    public JsonRoleColors Colors { get; set; }
 
     [JsonPropertyName("hoist")]
-    public required bool Hoist { get; set; }
+    [JsonRequired]
+    public bool Hoist { get; set; }
 
     [JsonPropertyName("icon")]
     public string? IconHash { get; set; }
@@ -24,28 +30,34 @@ public class JsonRole
     public string? UnicodeEmoji { get; set; }
 
     [JsonPropertyName("position")]
-    public required int Position { get; set; }
+    [JsonRequired]
+    public int Position { get; set; }
 
     [JsonPropertyName("permissions")]
-    public required ulong Permissions { get; set; }
+    [JsonRequired]
+    public ulong Permissions { get; set; }
 
     [JsonPropertyName("managed")]
-    public required bool Managed { get; set; }
+    [JsonRequired]
+    public bool Managed { get; set; }
 
     [JsonPropertyName("mentionable")]
-    public required bool Mentionable { get; set; }
+    [JsonRequired]
+    public bool Mentionable { get; set; }
 
     [JsonPropertyName("tags")]
     public JsonRoleTags? Tags { get; set; }
 
     [JsonPropertyName("flags")]
-    public required int Flags { get; set; }
+    [JsonRequired]
+    public int Flags { get; set; }
 }
 
 public class JsonRoleColors
 {
     [JsonPropertyName("primary_color")]
-    public required int PrimaryColor { get; set; }
+    [JsonRequired]
+    public int PrimaryColor { get; set; }
 
     [JsonPropertyName("secondary_color")]
     public int? SecondaryColor { get; set; }
@@ -121,13 +133,16 @@ public class JsonEmoji
 public class JsonUser
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("username")]
-    public required string Username { get; set; }
+    [JsonRequired]
+    public string Username { get; set; }
 
     [JsonPropertyName("discriminator")]
-    public required ushort Discriminator { get; set; }
+    [JsonRequired]
+    public ushort Discriminator { get; set; }
 
     [JsonPropertyName("global_name")]
     public string? GlobalName { get; set; }
@@ -184,10 +199,12 @@ public class JsonUser
 public class JsonAvatarDecorationData
 {
     [JsonPropertyName("asset")]
-    public required string Hash { get; set; }
+    [JsonRequired]
+    public string Hash { get; set; }
 
     [JsonPropertyName("sku_id")]
-    public required ulong SkuId { get; set; }
+    [JsonRequired]
+    public ulong SkuId { get; set; }
 }
 
 public class JsonCollectibles
@@ -199,16 +216,20 @@ public class JsonCollectibles
 public class JsonNameplate
 {
     [JsonPropertyName("sku_id")]
-    public required ulong SkuId { get; set; }
+    [JsonRequired]
+    public ulong SkuId { get; set; }
 
     [JsonPropertyName("asset")]
-    public required string Asset { get; set; }
+    [JsonRequired]
+    public string Asset { get; set; }
 
     [JsonPropertyName("label")]
-    public required string Label { get; set; }
+    [JsonRequired]
+    public string Label { get; set; }
 
     [JsonPropertyName("palette")]
-    public required string Palette { get; set; }
+    [JsonRequired]
+    public string Palette { get; set; }
 }
 
 public class JsonUserPrimaryGuild
@@ -229,7 +250,8 @@ public class JsonUserPrimaryGuild
 public class JsonGuildUser
 {
     [JsonPropertyName("user")]
-    public required JsonUser User { get; set; }
+    [JsonRequired]
+    public JsonUser User { get; set; }
 
     [JsonPropertyName("nick")]
     public string? Nickname { get; set; }
@@ -241,7 +263,8 @@ public class JsonGuildUser
     public string? GuildBannerHash { get; set; }
 
     [JsonPropertyName("roles")]
-    public required ulong[] RoleIds { get; set; }
+    [JsonRequired]
+    public ulong[] RoleIds { get; set; }
 
     [JsonPropertyName("joined_at")]
     public DateTimeOffset? JoinedAt { get; set; }
@@ -250,13 +273,16 @@ public class JsonGuildUser
     public DateTimeOffset? GuildBoostStart { get; set; }
 
     [JsonPropertyName("deaf")]
-    public required bool Deafened { get; set; }
+    [JsonRequired]
+    public bool Deafened { get; set; }
 
     [JsonPropertyName("mute")]
-    public required bool Muted { get; set; }
+    [JsonRequired]
+    public bool Muted { get; set; }
 
     [JsonPropertyName("flags")]
-    public required int GuildFlags { get; set; }
+    [JsonRequired]
+    public int GuildFlags { get; set; }
 
     [JsonPropertyName("pending")]
     public bool? IsPending { get; set; }
@@ -280,34 +306,42 @@ public class JsonVoiceState
     public ulong? ChannelId { get; set; }
 
     [JsonPropertyName("user_id")]
-    public required ulong UserId { get; set; }
+    [JsonRequired]
+    public ulong UserId { get; set; }
 
     [JsonPropertyName("member")]
     public JsonGuildUser? User { get; set; }
 
     [JsonPropertyName("session_id")]
-    public required string SessionId { get; set; }
+    [JsonRequired]
+    public string SessionId { get; set; }
 
     [JsonPropertyName("deaf")]
-    public required bool IsDeafened { get; set; }
+    [JsonRequired]
+    public bool IsDeafened { get; set; }
 
     [JsonPropertyName("mute")]
-    public required bool IsMuted { get; set; }
+    [JsonRequired]
+    public bool IsMuted { get; set; }
 
     [JsonPropertyName("self_deaf")]
-    public required bool IsSelfDeafened { get; set; }
+    [JsonRequired]
+    public bool IsSelfDeafened { get; set; }
 
     [JsonPropertyName("self_mute")]
-    public required bool IsSelfMuted { get; set; }
+    [JsonRequired]
+    public bool IsSelfMuted { get; set; }
 
     [JsonPropertyName("self_stream")]
     public bool? SelfStreamExists { get; set; }
 
     [JsonPropertyName("self_video")]
-    public required bool SelfVideoExists { get; set; }
+    [JsonRequired]
+    public bool SelfVideoExists { get; set; }
 
     [JsonPropertyName("suppress")]
-    public required bool Suppressed { get; set; }
+    [JsonRequired]
+    public bool Suppressed { get; set; }
 
     [JsonPropertyName("request_to_speak_timestamp")]
     public DateTimeOffset? RequestToSpeakTimestamp { get; set; }
@@ -316,31 +350,39 @@ public class JsonVoiceState
 public class JsonPermissionOverwrite
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("type")]
-    public required int Type { get; set; }
+    [JsonRequired]
+    public int Type { get; set; }
 
     [JsonPropertyName("allow")]
-    public required ulong Allowed { get; set; }
+    [JsonRequired]
+    public ulong Allowed { get; set; }
 
     [JsonPropertyName("deny")]
-    public required ulong Denied { get; set; }
+    [JsonRequired]
+    public ulong Denied { get; set; }
 }
 
 public class JsonGuildThreadMetadata
 {
     [JsonPropertyName("archived")]
-    public required bool Archived { get; set; }
+    [JsonRequired]
+    public bool Archived { get; set; }
 
     [JsonPropertyName("auto_archive_duration")]
-    public required int AutoArchiveDuration { get; set; }
+    [JsonRequired]
+    public int AutoArchiveDuration { get; set; }
 
     [JsonPropertyName("archive_timestamp")]
-    public required DateTimeOffset ArchiveTimestamp { get; set; }
+    [JsonRequired]
+    public DateTimeOffset ArchiveTimestamp { get; set; }
 
     [JsonPropertyName("locked")]
-    public required bool Locked { get; set; }
+    [JsonRequired]
+    public bool Locked { get; set; }
 
     [JsonPropertyName("invitable")]
     public bool? Invitable { get; set; }
@@ -352,22 +394,27 @@ public class JsonGuildThreadMetadata
 public class JsonThreadCurrentUser
 {
     [JsonPropertyName("join_timestamp")]
-    public required DateTimeOffset JoinTimestamp { get; set; }
+    [JsonRequired]
+    public DateTimeOffset JoinTimestamp { get; set; }
 
     [JsonPropertyName("flags")]
-    public required int Flags { get; set; }
+    [JsonRequired]
+    public int Flags { get; set; }
 }
 
 public class JsonForumTag
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("name")]
-    public required string Name { get; set; }
+    [JsonRequired]
+    public string Name { get; set; }
 
     [JsonPropertyName("moderated")]
-    public required bool Moderated { get; set; }
+    [JsonRequired]
+    public bool Moderated { get; set; }
 
     [JsonPropertyName("emoji_id")]
     public ulong? EmojiId { get; set; }
@@ -388,25 +435,31 @@ public class JsonForumGuildChannelDefaultReaction
 public class JsonGuildChannelMention
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("guild_id")]
-    public required ulong GuildId { get; set; }
+    [JsonRequired]
+    public ulong GuildId { get; set; }
 
     [JsonPropertyName("type")]
-    public required int Type { get; set; }
+    [JsonRequired]
+    public int Type { get; set; }
 
     [JsonPropertyName("name")]
-    public required string Name { get; set; }
+    [JsonRequired]
+    public string Name { get; set; }
 }
 
 public class JsonAttachment
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("filename")]
-    public required string FileName { get; set; }
+    [JsonRequired]
+    public string FileName { get; set; }
 
     [JsonPropertyName("title")]
     public string? Title { get; set; }
@@ -418,13 +471,16 @@ public class JsonAttachment
     public string? ContentType { get; set; }
 
     [JsonPropertyName("size")]
-    public required long Size { get; set; }
+    [JsonRequired]
+    public long Size { get; set; }
 
     [JsonPropertyName("url")]
-    public required string Url { get; set; }
+    [JsonRequired]
+    public string Url { get; set; }
 
     [JsonPropertyName("proxy_url")]
-    public required string ProxyUrl { get; set; }
+    [JsonRequired]
+    public string ProxyUrl { get; set; }
 
     [JsonPropertyName("height")]
     public int? Height { get; set; }
@@ -448,7 +504,8 @@ public class JsonAttachment
     public byte[]? Waveform { get; set; }
 
     [JsonPropertyName("flags")]
-    public required int Flags { get; set; }
+    [JsonRequired]
+    public int Flags { get; set; }
 
     [JsonPropertyName("clip_participants")]
     public JsonUser[]? ClipParticipants { get; set; }
@@ -463,43 +520,53 @@ public class JsonAttachment
 public class JsonTeamUser
 {
     [JsonPropertyName("membership_state")]
-    public required int MembershipState { get; set; }
+    [JsonRequired]
+    public int MembershipState { get; set; }
 
     [JsonPropertyName("team_id")]
-    public required ulong TeamId { get; set; }
+    [JsonRequired]
+    public ulong TeamId { get; set; }
 
     [JsonPropertyName("user")]
-    public required JsonUser User { get; set; }
+    [JsonRequired]
+    public JsonUser User { get; set; }
 
     [JsonPropertyName("role")]
-    public required string Role { get; set; }
+    [JsonRequired]
+    public string Role { get; set; }
 }
 
 public class JsonTeam
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("icon")]
     public string? IconHash { get; set; }
 
     [JsonPropertyName("members")]
-    public required JsonTeamUser[] Users { get; set; }
+    [JsonRequired]
+    public JsonTeamUser[] Users { get; set; }
 
     [JsonPropertyName("name")]
-    public required string Name { get; set; }
+    [JsonRequired]
+    public string Name { get; set; }
 
     [JsonPropertyName("owner_user_id")]
-    public required ulong OwnerId { get; set; }
+    [JsonRequired]
+    public ulong OwnerId { get; set; }
 }
 
 public class JsonApplicationInstallParams
 {
     [JsonPropertyName("scopes")]
-    public required string[] Scopes { get; set; }
+    [JsonRequired]
+    public string[] Scopes { get; set; }
 
     [JsonPropertyName("permissions")]
-    public required ulong Permissions { get; set; }
+    [JsonRequired]
+    public ulong Permissions { get; set; }
 }
 
 public class JsonApplicationIntegrationTypeConfiguration
@@ -511,19 +578,23 @@ public class JsonApplicationIntegrationTypeConfiguration
 public class JsonApplication
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("name")]
-    public required string Name { get; set; }
+    [JsonRequired]
+    public string Name { get; set; }
 
     [JsonPropertyName("icon")]
     public string? IconHash { get; set; }
 
     [JsonPropertyName("description")]
-    public required string Description { get; set; }
+    [JsonRequired]
+    public string Description { get; set; }
 
     [JsonPropertyName("rpc_origins")]
-    public required string[] RpcOrigins { get; set; }
+    [JsonRequired]
+    public string[] RpcOrigins { get; set; }
 
     [JsonPropertyName("bot_public")]
     public bool? BotPublic { get; set; }
@@ -544,7 +615,8 @@ public class JsonApplication
     public JsonUser? Owner { get; set; }
 
     [JsonPropertyName("verify_key")]
-    public required string VerifyKey { get; set; }
+    [JsonRequired]
+    public string VerifyKey { get; set; }
 
     [JsonPropertyName("team")]
     public JsonTeam? Team { get; set; }
@@ -586,7 +658,8 @@ public class JsonApplication
     public string? EventWebhooksUrl { get; set; }
 
     [JsonPropertyName("event_webhooks_status")]
-    public required int EventWebhooksStatus { get; set; }
+    [JsonRequired]
+    public int EventWebhooksStatus { get; set; }
 
     [JsonPropertyName("event_webhooks_types")]
     public string[]? EventWebhooksTypes { get; set; }
@@ -598,7 +671,8 @@ public class JsonApplication
     public JsonApplicationInstallParams? InstallParams { get; set; }
 
     [JsonPropertyName("integration_types_config")]
-    public required IReadOnlyDictionary<int, JsonApplicationIntegrationTypeConfiguration> IntegrationTypesConfiguration { get; set; }
+    [JsonRequired]
+    public IReadOnlyDictionary<int, JsonApplicationIntegrationTypeConfiguration> IntegrationTypesConfiguration { get; set; }
 
     [JsonPropertyName("custom_install_url")]
     public string? CustomInstallUrl { get; set; }
@@ -607,7 +681,8 @@ public class JsonApplication
 public class JsonEmbedFooter
 {
     [JsonPropertyName("text")]
-    public required string Text { get; set; }
+    [JsonRequired]
+    public string Text { get; set; }
 
     [JsonPropertyName("icon_url")]
     public string? IconUrl { get; set; }
@@ -688,10 +763,12 @@ public class JsonEmbedAuthor
 public class JsonEmbedField
 {
     [JsonPropertyName("name")]
-    public required string Name { get; set; }
+    [JsonRequired]
+    public string Name { get; set; }
 
     [JsonPropertyName("value")]
-    public required string Value { get; set; }
+    [JsonRequired]
+    public string Value { get; set; }
 
     [JsonPropertyName("inline")]
     public bool? Inline { get; set; }
@@ -736,43 +813,53 @@ public class JsonEmbed
     public JsonEmbedAuthor? Author { get; set; }
 
     [JsonPropertyName("fields")]
-    public required JsonEmbedField[] Fields { get; set; }
+    [JsonRequired]
+    public JsonEmbedField[] Fields { get; set; }
 }
 
 public class JsonMessageReactionCountDetails
 {
     [JsonPropertyName("burst")]
-    public required int Burst { get; set; }
+    [JsonRequired]
+    public int Burst { get; set; }
 
     [JsonPropertyName("normal")]
-    public required int Normal { get; set; }
+    [JsonRequired]
+    public int Normal { get; set; }
 }
 
 public class JsonMessageReaction
 {
     [JsonPropertyName("count")]
-    public required int Count { get; set; }
+    [JsonRequired]
+    public int Count { get; set; }
 
     [JsonPropertyName("count_details")]
-    public required JsonMessageReactionCountDetails CountDetails { get; set; }
+    [JsonRequired]
+    public JsonMessageReactionCountDetails CountDetails { get; set; }
 
     [JsonPropertyName("me")]
-    public required bool Me { get; set; }
+    [JsonRequired]
+    public bool Me { get; set; }
 
     [JsonPropertyName("me_burst")]
-    public required bool MeBurst { get; set; }
+    [JsonRequired]
+    public bool MeBurst { get; set; }
 
     [JsonPropertyName("emoji")]
-    public required JsonEmoji Emoji { get; set; }
+    [JsonRequired]
+    public JsonEmoji Emoji { get; set; }
 
     [JsonPropertyName("burst_colors")]
-    public required int[] BurstColors { get; set; }
+    [JsonRequired]
+    public int[] BurstColors { get; set; }
 }
 
 public class JsonMessageActivity
 {
     [JsonPropertyName("type")]
-    public required int Type { get; set; }
+    [JsonRequired]
+    public int Type { get; set; }
 
     [JsonPropertyName("party_id")]
     public string? PartyId { get; set; }
@@ -799,25 +886,31 @@ public class JsonMessageReference
 public class JsonMessageSnapshot
 {
     [JsonPropertyName("message")]
-    public required JsonMessageSnapshotMessage Message { get; set; }
+    [JsonRequired]
+    public JsonMessageSnapshotMessage Message { get; set; }
 }
 
 public class JsonMessageSnapshotMessage
 {
     [JsonPropertyName("type")]
-    public required int Type { get; set; }
+    [JsonRequired]
+    public int Type { get; set; }
 
     [JsonPropertyName("content")]
-    public required string Content { get; set; }
+    [JsonRequired]
+    public string Content { get; set; }
 
     [JsonPropertyName("embeds")]
-    public required JsonEmbed[] Embeds { get; set; }
+    [JsonRequired]
+    public JsonEmbed[] Embeds { get; set; }
 
     [JsonPropertyName("attachments")]
-    public required JsonAttachment[] Attachments { get; set; }
+    [JsonRequired]
+    public JsonAttachment[] Attachments { get; set; }
 
     [JsonPropertyName("timestamp")]
-    public required DateTimeOffset CreatedAt { get; set; }
+    [JsonRequired]
+    public DateTimeOffset CreatedAt { get; set; }
 
     [JsonPropertyName("edited_timestamp")]
     public DateTimeOffset? EditedAt { get; set; }
@@ -826,10 +919,12 @@ public class JsonMessageSnapshotMessage
     public uint? Flags { get; set; }
 
     [JsonPropertyName("mentions")]
-    public required JsonUser[] MentionedUsers { get; set; }
+    [JsonRequired]
+    public JsonUser[] MentionedUsers { get; set; }
 
     [JsonPropertyName("mention_roles")]
-    public required ulong[] MentionedRoleIds { get; set; }
+    [JsonRequired]
+    public ulong[] MentionedRoleIds { get; set; }
 
     [JsonPropertyName("sticker_items")]
     public JsonMessageSticker[]? Stickers { get; set; }
@@ -838,28 +933,35 @@ public class JsonMessageSnapshotMessage
 public class JsonMessageSticker
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("name")]
-    public required string Name { get; set; }
+    [JsonRequired]
+    public string Name { get; set; }
 
     [JsonPropertyName("format_type")]
-    public required int Format { get; set; }
+    [JsonRequired]
+    public int Format { get; set; }
 }
 
 public class JsonMessageInteractionMetadata
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("type")]
-    public required int Type { get; set; }
+    [JsonRequired]
+    public int Type { get; set; }
 
     [JsonPropertyName("user")]
-    public required JsonUser User { get; set; }
+    [JsonRequired]
+    public JsonUser User { get; set; }
 
     [JsonPropertyName("authorizing_integration_owners")]
-    public required IReadOnlyDictionary<int, ulong> AuthorizingIntegrationOwners { get; set; }
+    [JsonRequired]
+    public IReadOnlyDictionary<int, ulong> AuthorizingIntegrationOwners { get; set; }
 
     [JsonPropertyName("original_response_message_id")]
     public ulong? OriginalResponseMessageId { get; set; }
@@ -874,10 +976,12 @@ public class JsonMessageInteractionMetadata
 public class JsonChannel
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("type")]
-    public required int Type { get; set; }
+    [JsonRequired]
+    public int Type { get; set; }
 
     [JsonPropertyName("guild_id")]
     public ulong? GuildId { get; set; }
@@ -1030,16 +1134,19 @@ public class JsonUserActivitySecrets
 public class JsonUserActivity
 {
     [JsonPropertyName("name")]
-    public required string Name { get; set; }
+    [JsonRequired]
+    public string Name { get; set; }
 
     [JsonPropertyName("type")]
-    public required int Type { get; set; }
+    [JsonRequired]
+    public int Type { get; set; }
 
     [JsonPropertyName("url")]
     public string? Url { get; set; }
 
     [JsonPropertyName("created_at")]
-    public required long CreatedAt { get; set; }
+    [JsonRequired]
+    public long CreatedAt { get; set; }
 
     [JsonPropertyName("timestamps")]
     public JsonUserActivityTimestamps? Timestamps { get; set; }
@@ -1078,25 +1185,29 @@ public class JsonUserActivity
 public class JsonPresence
 {
     [JsonPropertyName("user")]
-    public required JsonPresenceUser User { get; set; }
+    [JsonRequired]
+    public JsonPresenceUser User { get; set; }
 
     [JsonPropertyName("guild_id")]
     public ulong? GuildId { get; set; }
 
     [JsonPropertyName("status")]
-    public required string Status { get; set; }
+    [JsonRequired]
+    public string Status { get; set; }
 
     [JsonPropertyName("activities")]
     public JsonUserActivity[]? Activities { get; set; }
 
     [JsonPropertyName("client_status")]
-    public required IReadOnlyDictionary<string, string> Platform { get; set; }
+    [JsonRequired]
+    public IReadOnlyDictionary<string, string> Platform { get; set; }
 }
 
 public class JsonPresenceUser
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("username")]
     public string? Username { get; set; }
@@ -1159,10 +1270,12 @@ public class JsonPresenceUser
 public class JsonWelcomeScreenChannel
 {
     [JsonPropertyName("channel_id")]
-    public required ulong ChannelId { get; set; }
+    [JsonRequired]
+    public ulong ChannelId { get; set; }
 
     [JsonPropertyName("description")]
-    public required string Description { get; set; }
+    [JsonRequired]
+    public string Description { get; set; }
 
     [JsonPropertyName("emoji_id")]
     public ulong? EmojiId { get; set; }
@@ -1177,55 +1290,68 @@ public class JsonGuildWelcomeScreen
     public string? Description { get; set; }
 
     [JsonPropertyName("welcome_channels")]
-    public required JsonWelcomeScreenChannel[] WelcomeChannels { get; set; }
+    [JsonRequired]
+    public JsonWelcomeScreenChannel[] WelcomeChannels { get; set; }
 }
 
 public class JsonStageInstance
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("guild_id")]
-    public required ulong GuildId { get; set; }
+    [JsonRequired]
+    public ulong GuildId { get; set; }
 
     [JsonPropertyName("channel_id")]
-    public required ulong ChannelId { get; set; }
+    [JsonRequired]
+    public ulong ChannelId { get; set; }
 
     [JsonPropertyName("topic")]
-    public required string Topic { get; set; }
+    [JsonRequired]
+    public string Topic { get; set; }
 
     [JsonPropertyName("privacy_level")]
-    public required int PrivacyLevel { get; set; }
+    [JsonRequired]
+    public int PrivacyLevel { get; set; }
 
     [JsonPropertyName("discoverable_disabled")]
-    public required bool DiscoverableDisabled { get; set; }
+    [JsonRequired]
+    public bool DiscoverableDisabled { get; set; }
 }
 
 public class JsonSticker
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("pack_id")]
     public ulong? PackId { get; set; }
 
     [JsonPropertyName("name")]
-    public required string Name { get; set; }
+    [JsonRequired]
+    public string Name { get; set; }
 
     [JsonPropertyName("description")]
-    public required string Description { get; set; }
+    [JsonRequired]
+    public string Description { get; set; }
 
     [JsonPropertyName("tags")]
-    public required string Tags { get; set; }
+    [JsonRequired]
+    public string Tags { get; set; }
 
     [JsonPropertyName("format_type")]
-    public required int Format { get; set; }
+    [JsonRequired]
+    public int Format { get; set; }
 
     [JsonPropertyName("available")]
     public bool? Available { get; set; }
 
     [JsonPropertyName("guild_id")]
-    public required ulong GuildId { get; set; }
+    [JsonRequired]
+    public ulong GuildId { get; set; }
 
     [JsonPropertyName("user")]
     public JsonUser? Creator { get; set; }
@@ -1243,10 +1369,12 @@ public class JsonGuildScheduledEventMetadata
 public class JsonGuildScheduledEventRecurrenceRuleNWeekday
 {
     [JsonPropertyName("n")]
-    public required int N { get; set; }
+    [JsonRequired]
+    public int N { get; set; }
 
     [JsonPropertyName("day")]
-    public required byte Day { get; set; }
+    [JsonRequired]
+    public byte Day { get; set; }
 }
 
 public class JsonGuildScheduledEventRecurrenceRule
@@ -1258,10 +1386,12 @@ public class JsonGuildScheduledEventRecurrenceRule
     public DateTimeOffset? EndAt { get; set; }
 
     [JsonPropertyName("frequency")]
-    public required byte Frequency { get; set; }
+    [JsonRequired]
+    public byte Frequency { get; set; }
 
     [JsonPropertyName("interval")]
-    public required int Interval { get; set; }
+    [JsonRequired]
+    public int Interval { get; set; }
 
     [JsonPropertyName("by_weekday")]
     public byte[]? ByWeekday { get; set; }
@@ -1285,10 +1415,12 @@ public class JsonGuildScheduledEventRecurrenceRule
 public class JsonGuildScheduledEvent
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("guild_id")]
-    public required ulong GuildId { get; set; }
+    [JsonRequired]
+    public ulong GuildId { get; set; }
 
     [JsonPropertyName("channel_id")]
     public ulong? ChannelId { get; set; }
@@ -1297,25 +1429,30 @@ public class JsonGuildScheduledEvent
     public ulong? CreatorId { get; set; }
 
     [JsonPropertyName("name")]
-    public required string Name { get; set; }
+    [JsonRequired]
+    public string Name { get; set; }
 
     [JsonPropertyName("description")]
     public string? Description { get; set; }
 
     [JsonPropertyName("scheduled_start_time")]
-    public required DateTimeOffset ScheduledStartTime { get; set; }
+    [JsonRequired]
+    public DateTimeOffset ScheduledStartTime { get; set; }
 
     [JsonPropertyName("scheduled_end_time")]
     public DateTimeOffset? ScheduledEndTime { get; set; }
 
     [JsonPropertyName("privacy_level")]
-    public required int PrivacyLevel { get; set; }
+    [JsonRequired]
+    public int PrivacyLevel { get; set; }
 
     [JsonPropertyName("status")]
-    public required int Status { get; set; }
+    [JsonRequired]
+    public int Status { get; set; }
 
     [JsonPropertyName("entity_type")]
-    public required int EntityType { get; set; }
+    [JsonRequired]
+    public int EntityType { get; set; }
 
     [JsonPropertyName("entity_id")]
     public ulong? EntityId { get; set; }
@@ -1339,10 +1476,12 @@ public class JsonGuildScheduledEvent
 public class JsonGuild
 {
     [JsonPropertyName("id")]
-    public required ulong Id { get; set; }
+    [JsonRequired]
+    public ulong Id { get; set; }
 
     [JsonPropertyName("name")]
-    public required string Name { get; set; }
+    [JsonRequired]
+    public string Name { get; set; }
 
     [JsonPropertyName("icon")]
     public string? IconHash { get; set; }
@@ -1360,7 +1499,8 @@ public class JsonGuild
     public bool? IsOwner { get; set; }
 
     [JsonPropertyName("owner_id")]
-    public required ulong OwnerId { get; set; }
+    [JsonRequired]
+    public ulong OwnerId { get; set; }
 
     [JsonPropertyName("permissions")]
     public ulong? Permissions { get; set; }
@@ -1369,7 +1509,8 @@ public class JsonGuild
     public ulong? AfkChannelId { get; set; }
 
     [JsonPropertyName("afk_timeout")]
-    public required int AfkTimeout { get; set; }
+    [JsonRequired]
+    public int AfkTimeout { get; set; }
 
     [JsonPropertyName("widget_enabled")]
     public bool? WidgetEnabled { get; set; }
@@ -1378,25 +1519,32 @@ public class JsonGuild
     public ulong? WidgetChannelId { get; set; }
 
     [JsonPropertyName("verification_level")]
-    public required int VerificationLevel { get; set; }
+    [JsonRequired]
+    public int VerificationLevel { get; set; }
 
     [JsonPropertyName("default_message_notifications")]
-    public required int DefaultMessageNotificationLevel { get; set; }
+    [JsonRequired]
+    public int DefaultMessageNotificationLevel { get; set; }
 
     [JsonPropertyName("explicit_content_filter")]
-    public required int ContentFilter { get; set; }
+    [JsonRequired]
+    public int ContentFilter { get; set; }
 
     [JsonPropertyName("roles")]
-    public required JsonRole[] Roles { get; set; }
+    [JsonRequired]
+    public JsonRole[] Roles { get; set; }
 
     [JsonPropertyName("emojis")]
-    public required JsonEmoji[] Emojis { get; set; }
+    [JsonRequired]
+    public JsonEmoji[] Emojis { get; set; }
 
     [JsonPropertyName("features")]
-    public required string[] Features { get; set; }
+    [JsonRequired]
+    public string[] Features { get; set; }
 
     [JsonPropertyName("mfa_level")]
-    public required int MfaLevel { get; set; }
+    [JsonRequired]
+    public int MfaLevel { get; set; }
 
     [JsonPropertyName("application_id")]
     public ulong? ApplicationId { get; set; }
@@ -1405,37 +1553,46 @@ public class JsonGuild
     public ulong? SystemChannelId { get; set; }
 
     [JsonPropertyName("system_channel_flags")]
-    public required int SystemChannelFlags { get; set; }
+    [JsonRequired]
+    public int SystemChannelFlags { get; set; }
 
     [JsonPropertyName("rules_channel_id")]
     public ulong? RulesChannelId { get; set; }
 
     [JsonPropertyName("joined_at")]
-    public required DateTimeOffset JoinedAt { get; set; }
+    [JsonRequired]
+    public DateTimeOffset JoinedAt { get; set; }
 
     [JsonPropertyName("large")]
-    public required bool IsLarge { get; set; }
+    [JsonRequired]
+    public bool IsLarge { get; set; }
 
     [JsonPropertyName("unavailable")]
     public bool? IsUnavailable { get; set; }
 
     [JsonPropertyName("member_count")]
-    public required int UserCount { get; set; }
+    [JsonRequired]
+    public int UserCount { get; set; }
 
     [JsonPropertyName("voice_states")]
-    public required JsonVoiceState[] VoiceStates { get; set; }
+    [JsonRequired]
+    public JsonVoiceState[] VoiceStates { get; set; }
 
     [JsonPropertyName("members")]
-    public required JsonGuildUser[] Users { get; set; }
+    [JsonRequired]
+    public JsonGuildUser[] Users { get; set; }
 
     [JsonPropertyName("channels")]
-    public required JsonChannel[] Channels { get; set; }
+    [JsonRequired]
+    public JsonChannel[] Channels { get; set; }
 
     [JsonPropertyName("threads")]
-    public required JsonChannel[] ActiveThreads { get; set; }
+    [JsonRequired]
+    public JsonChannel[] ActiveThreads { get; set; }
 
     [JsonPropertyName("presences")]
-    public required JsonPresence[] Presences { get; set; }
+    [JsonRequired]
+    public JsonPresence[] Presences { get; set; }
 
     [JsonPropertyName("max_presences")]
     public int? MaxPresences { get; set; }
@@ -1453,13 +1610,15 @@ public class JsonGuild
     public string? BannerHash { get; set; }
 
     [JsonPropertyName("premium_tier")]
-    public required int PremiumTier { get; set; }
+    [JsonRequired]
+    public int PremiumTier { get; set; }
 
     [JsonPropertyName("premium_subscription_count")]
     public int? PremiumSubscriptionCount { get; set; }
 
     [JsonPropertyName("preferred_locale")]
-    public required string PreferredLocale { get; set; }
+    [JsonRequired]
+    public string PreferredLocale { get; set; }
 
     [JsonPropertyName("public_updates_channel_id")]
     public ulong? PublicUpdatesChannelId { get; set; }
@@ -1480,19 +1639,24 @@ public class JsonGuild
     public JsonGuildWelcomeScreen? WelcomeScreen { get; set; }
 
     [JsonPropertyName("nsfw_level")]
-    public required int NsfwLevel { get; set; }
+    [JsonRequired]
+    public int NsfwLevel { get; set; }
 
     [JsonPropertyName("stage_instances")]
-    public required JsonStageInstance[] StageInstances { get; set; }
+    [JsonRequired]
+    public JsonStageInstance[] StageInstances { get; set; }
 
     [JsonPropertyName("stickers")]
-    public required JsonSticker[] Stickers { get; set; }
+    [JsonRequired]
+    public JsonSticker[] Stickers { get; set; }
 
     [JsonPropertyName("guild_scheduled_events")]
-    public required JsonGuildScheduledEvent[] ScheduledEvents { get; set; }
+    [JsonRequired]
+    public JsonGuildScheduledEvent[] ScheduledEvents { get; set; }
 
     [JsonPropertyName("premium_progress_bar_enabled")]
-    public required bool PremiumProgressBarEnabled { get; set; }
+    [JsonRequired]
+    public bool PremiumProgressBarEnabled { get; set; }
 
     [JsonPropertyName("safety_alerts_channel_id")]
     public ulong? SafetyAlertsChannelId { get; set; }
