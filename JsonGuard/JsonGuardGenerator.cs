@@ -114,7 +114,7 @@ public sealed class JsonGuardGenerator : IIncrementalGenerator
     private static readonly DiagnosticDescriptor s_noNonNullableReferenceTypeProperties = new(
         "JG0003",
         "No non-nullable reference type properties",
-        "The target type should have at least one non-nullable reference type property with a getter supposed. Consider removing the JsonGuard.JsonGuardAttribute if this is intentional.",
+        "The target type should have at least one non-nullable reference type property with a getter defined. Consider removing the JsonGuard.JsonGuardAttribute if this is intentional.",
         "Usage",
         DiagnosticSeverity.Warning,
         true);

@@ -1,4 +1,4 @@
-namespace JsonGuard.Benchmarks.Discord;
+namespace JsonGuard.Benchmarks.Complex;
 
 public static class JsonData
 {
