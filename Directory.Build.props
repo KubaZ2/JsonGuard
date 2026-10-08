@@ -12,6 +12,8 @@
     <PackageTags>json;validation;guard</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>An efficient, allocation free JSON validation library for System.Text.Json, based on Source Generation.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>ICON.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(CI)' != ''">
@@ -23,6 +25,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)/Resources/NuGet/README.md" Pack="true" PackagePath="" />
+    <None Include="$(MSBuildThisFileDirectory)/Resources/NuGet/ICON.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
