@@ -35,6 +35,7 @@
         default = pkgs.mkShell {
           packages = [
             dotnet
+            pkgs.mono
           ];
 
           DOTNET_ROOT = dotnetRoot;

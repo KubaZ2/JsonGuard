@@ -256,8 +256,14 @@ public sealed class JsonGuardGenerator : IIncrementalGenerator
         writer.WriteLine("{");
         writer.Indent++;
 
+        writer.WriteLineNoTabs("#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER");
         writer.WriteLine("[global::System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute]");
+        writer.WriteLineNoTabs("#endif");
+
+        writer.WriteLineNoTabs("#if NET6_0_OR_GREATER");
         writer.WriteLine("[global::System.Diagnostics.StackTraceHiddenAttribute]");
+        writer.WriteLineNoTabs("#endif");
+
         writer.WriteLine("public static void Throw(string memberName)");
         writer.WriteLine("{");
         writer.Indent++;
