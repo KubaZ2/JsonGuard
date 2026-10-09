@@ -87,12 +87,12 @@ dotnet add package JsonGuard
 The source code of benchmarks can be found in the [JsonGuard.Benchmarks](JsonGuard.Benchmarks) directory.
 
 The benchmarks evaluate performance across two runtimes (JIT and Native AOT) using two distinct workloads:
-- **Complex Scenario**: A large JSON document (a large Discord guild payload).
-- **Simple Scenario**: A small JSON document (basic user information).
+- **Complex Scenario:** A large JSON document (a large Discord guild payload).
+- **Simple Scenario:** A small JSON document (basic user information).
 
 > [!NOTE]
-> - JIT: The results include both reflection-based and source-generated deserialization.
-> - Native AOT: The results include only source-generated deserialization, as Native AOT inherently lacks support for reflection-based deserialization.
+> - **JIT:** The results include both reflection-based and source-generated deserialization.
+> - **Native AOT:** The results include only source-generated deserialization, as Native AOT inherently lacks support for reflection-based deserialization.
 
 ### JIT
 
