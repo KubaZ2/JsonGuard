@@ -50,9 +50,9 @@ Additionally, JsonGuard suppresses nullability warnings for validated properties
 
 ## Compatibility
 
-- **C#**: 11 or later
-- **System.Text.Json**: 6.0.0 or later
-- **.NET**: .NET 6.0 or later, .NET Framework 4.6.2 or later, .NET Standard 2.0 or later
+- **C#:** 11+
+- **System.Text.Json:** 6.0.0+
+- **.NET:** Any that supports System.Text.Json 6.0.0+, including .NET 5.0+, .NET Core 3.1+, .NET Framework 4.6.1+, and .NET Standard 2.0+.
 
 ## Installation
 
