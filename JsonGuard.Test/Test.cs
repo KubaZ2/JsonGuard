@@ -119,13 +119,13 @@ public partial class VirtualPropertyBaseClass
 }
 
 [JsonGuard]
-public partial class VirtualPropertyDerivedClass<TCounter> : VirtualPropertyBaseClass where TCounter : IVirtualPropertyDerivedClassCounter
+public partial class VirtualPropertyDerivedClass : VirtualPropertyBaseClass
 {
     public override string SomeProperty
     {
         get
         {
-            TCounter.Increment();
+            VirtualPropertyDerivedClassCounter.Increment();
             return base.SomeProperty;
         }
         set
@@ -135,29 +135,7 @@ public partial class VirtualPropertyDerivedClass<TCounter> : VirtualPropertyBase
     }
 }
 
-public interface IVirtualPropertyDerivedClassCounter
-{
-    public static abstract void Increment();
-}
-
-public sealed class VirtualPropertyDerivedClassCounter1 : IVirtualPropertyDerivedClassCounter
-{
-    private static int _count;
-
-    public static int Count => _count;
-
-    public static void Increment()
-    {
-        Interlocked.Increment(ref _count);
-    }
-
-    public static void Reset()
-    {
-        Interlocked.Exchange(ref _count, 0);
-    }
-}
-
-public sealed class VirtualPropertyDerivedClassCounter2 : IVirtualPropertyDerivedClassCounter
+public static class VirtualPropertyDerivedClassCounter
 {
     private static int _count;
 
@@ -180,42 +158,20 @@ public abstract class AbstractPropertyBaseClass
 }
 
 [JsonGuard]
-public partial class AbstractPropertyDerivedClass<TCounter> : AbstractPropertyBaseClass where TCounter : IAbstractPropertyDerivedClassCounter
+public partial class AbstractPropertyDerivedClass : AbstractPropertyBaseClass
 {
     public override string SomeProperty
     {
         get
         {
-            TCounter.Increment();
+            AbstractPropertyDerivedClassCounter.Increment();
             return field;
         }
         set;
     }
 }
 
-public interface IAbstractPropertyDerivedClassCounter
-{
-    public static abstract void Increment();
-}
-
-public sealed class AbstractPropertyDerivedClassCounter1 : IAbstractPropertyDerivedClassCounter
-{
-    private static int _count;
-
-    public static int Count => _count;
-
-    public static void Increment()
-    {
-        Interlocked.Increment(ref _count);
-    }
-
-    public static void Reset()
-    {
-        Interlocked.Exchange(ref _count, 0);
-    }
-}
-
-public sealed class AbstractPropertyDerivedClassCounter2 : IAbstractPropertyDerivedClassCounter
+public static class AbstractPropertyDerivedClassCounter
 {
     private static int _count;
 
@@ -408,48 +364,52 @@ public sealed class Test
         Assert.AreEqual("The member 'SomeProperty' cannot be null.", exception.Message);
     }
 
+    [DoNotParallelize]
     [TestMethod]
     public void TestMissingNonNullablePropertyInVirtualPropertyDerivedClass()
     {
-        var exception = Assert.ThrowsExactly<JsonException>(() => JsonSerializer.Deserialize<VirtualPropertyDerivedClass<VirtualPropertyDerivedClassCounter1>>("{}"u8));
+        VirtualPropertyDerivedClassCounter.Reset();
+
+        var exception = Assert.ThrowsExactly<JsonException>(() => JsonSerializer.Deserialize<VirtualPropertyDerivedClass>("{}"u8));
 
         Assert.AreEqual("The member 'SomeProperty' cannot be null.", exception.Message);
-
-        VirtualPropertyDerivedClassCounter1.Reset();
     }
 
+    [DoNotParallelize]
     [TestMethod]
     public void TestPresentNonNullablePropertyInVirtualPropertyDerivedClassWithGet()
     {
-        var obj = JsonSerializer.Deserialize<VirtualPropertyDerivedClass<VirtualPropertyDerivedClassCounter2>>("""{"SomeProperty":"value"}"""u8);
+        VirtualPropertyDerivedClassCounter.Reset();
+
+        var obj = JsonSerializer.Deserialize<VirtualPropertyDerivedClass>("""{"SomeProperty":"value"}"""u8);
 
         Assert.IsNotNull(obj);
-        Assert.AreEqual(1, VirtualPropertyDerivedClassCounter2.Count);
+        Assert.AreEqual(1, VirtualPropertyDerivedClassCounter.Count);
         Assert.AreEqual("value", obj.SomeProperty);
-
-        VirtualPropertyDerivedClassCounter2.Reset();
     }
 
+    [DoNotParallelize]
     [TestMethod]
     public void TestMissingNonNullablePropertyInAbstractPropertyDerivedClass()
     {
-        var exception = Assert.ThrowsExactly<JsonException>(() => JsonSerializer.Deserialize<AbstractPropertyDerivedClass<AbstractPropertyDerivedClassCounter1>>("{}"u8));
+        AbstractPropertyDerivedClassCounter.Reset();
+
+        var exception = Assert.ThrowsExactly<JsonException>(() => JsonSerializer.Deserialize<AbstractPropertyDerivedClass>("{}"u8));
 
         Assert.AreEqual("The member 'SomeProperty' cannot be null.", exception.Message);
-
-        AbstractPropertyDerivedClassCounter1.Reset();
     }
 
+    [DoNotParallelize]
     [TestMethod]
     public void TestPresentNonNullablePropertyInAbstractPropertyDerivedClassWithGet()
     {
-        var obj = JsonSerializer.Deserialize<AbstractPropertyDerivedClass<AbstractPropertyDerivedClassCounter2>>("""{"SomeProperty":"value"}"""u8);
+        AbstractPropertyDerivedClassCounter.Reset();
+
+        var obj = JsonSerializer.Deserialize<AbstractPropertyDerivedClass>("""{"SomeProperty":"value"}"""u8);
 
         Assert.IsNotNull(obj);
-        Assert.AreEqual(1, AbstractPropertyDerivedClassCounter2.Count);
+        Assert.AreEqual(1, AbstractPropertyDerivedClassCounter.Count);
         Assert.AreEqual("value", obj.SomeProperty);
-
-        AbstractPropertyDerivedClassCounter2.Reset();
     }
 
     [TestMethod]
