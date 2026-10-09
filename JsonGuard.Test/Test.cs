@@ -368,48 +368,48 @@ public sealed class Test
     [TestMethod]
     public void TestMissingNonNullablePropertyInVirtualPropertyDerivedClass()
     {
+        VirtualPropertyDerivedClassCounter.Reset();
+
         var exception = Assert.ThrowsExactly<JsonException>(() => JsonSerializer.Deserialize<VirtualPropertyDerivedClass>("{}"u8));
 
         Assert.AreEqual("The member 'SomeProperty' cannot be null.", exception.Message);
-
-        VirtualPropertyDerivedClassCounter.Reset();
     }
 
     [DoNotParallelize]
     [TestMethod]
     public void TestPresentNonNullablePropertyInVirtualPropertyDerivedClassWithGet()
     {
+        VirtualPropertyDerivedClassCounter.Reset();
+
         var obj = JsonSerializer.Deserialize<VirtualPropertyDerivedClass>("""{"SomeProperty":"value"}"""u8);
 
         Assert.IsNotNull(obj);
         Assert.AreEqual(1, VirtualPropertyDerivedClassCounter.Count);
         Assert.AreEqual("value", obj.SomeProperty);
-
-        VirtualPropertyDerivedClassCounter.Reset();
     }
 
     [DoNotParallelize]
     [TestMethod]
     public void TestMissingNonNullablePropertyInAbstractPropertyDerivedClass()
     {
+        AbstractPropertyDerivedClassCounter.Reset();
+
         var exception = Assert.ThrowsExactly<JsonException>(() => JsonSerializer.Deserialize<AbstractPropertyDerivedClass>("{}"u8));
 
         Assert.AreEqual("The member 'SomeProperty' cannot be null.", exception.Message);
-
-        AbstractPropertyDerivedClassCounter.Reset();
     }
 
     [DoNotParallelize]
     [TestMethod]
     public void TestPresentNonNullablePropertyInAbstractPropertyDerivedClassWithGet()
     {
+        AbstractPropertyDerivedClassCounter.Reset();
+
         var obj = JsonSerializer.Deserialize<AbstractPropertyDerivedClass>("""{"SomeProperty":"value"}"""u8);
 
         Assert.IsNotNull(obj);
         Assert.AreEqual(1, AbstractPropertyDerivedClassCounter.Count);
         Assert.AreEqual("value", obj.SomeProperty);
-
-        AbstractPropertyDerivedClassCounter.Reset();
     }
 
     [TestMethod]
