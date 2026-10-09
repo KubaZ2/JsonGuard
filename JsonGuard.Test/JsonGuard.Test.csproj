@@ -6,6 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="MSTest" />
+    <PackageReference Include="PolySharp">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

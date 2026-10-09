@@ -63,7 +63,6 @@ public partial class ManyNonNullablePropertiesClass
     public string SomeProperty2 { get; set; }
 }
 
-#if NET10_0_OR_GREATER
 [JsonGuard]
 public partial record NonNullablePropertyRecord(string SomeProperty);
 
@@ -71,7 +70,6 @@ public partial record NonNullablePropertyRecord(string SomeProperty);
 [JsonGuard]
 public partial record NullablePropertyRecord(string? SomeProperty);
 #pragma warning restore JG0003 // No non-nullable reference type properties
-#endif
 
 [JsonGuard]
 public partial struct NonNullablePropertyStruct
@@ -87,7 +85,6 @@ public partial struct NullablePropertyStruct
 }
 #pragma warning restore JG0003 // No non-nullable reference type properties
 
-#if NET10_0_OR_GREATER
 [JsonGuard]
 public partial record struct NonNullablePropertyRecordStruct(string SomeProperty);
 
@@ -95,7 +92,6 @@ public partial record struct NonNullablePropertyRecordStruct(string SomeProperty
 [JsonGuard]
 public partial record struct NullablePropertyRecordStruct(string? SomeProperty);
 #pragma warning restore JG0003 // No non-nullable reference type properties
-#endif
 
 public partial interface IContainingInterface
 {
@@ -178,7 +174,6 @@ public sealed class VirtualPropertyDerivedClassCounter2 : IVirtualPropertyDerive
         Interlocked.Exchange(ref _count, 0);
     }
 }
-
 public abstract class AbstractPropertyBaseClass
 {
     public abstract string SomeProperty { get; set; }
@@ -349,7 +344,6 @@ public sealed class Test
         Assert.AreEqual("value2", obj.SomeProperty2);
     }
 
-#if NET10_0_OR_GREATER
     [TestMethod]
     public void TestMissingNonNullablePropertyRecord()
     {
@@ -366,7 +360,6 @@ public sealed class Test
         Assert.IsNotNull(obj);
         Assert.IsNull(obj.SomeProperty);
     }
-#endif
 
     [TestMethod]
     public void TestMissingNonNullablePropertyStruct()
@@ -384,7 +377,6 @@ public sealed class Test
         Assert.IsNull(obj.SomeProperty);
     }
 
-#if NET10_0_OR_GREATER
     [TestMethod]
     public void TestMissingNonNullablePropertyRecordStruct()
     {
@@ -400,7 +392,6 @@ public sealed class Test
 
         Assert.IsNull(obj.SomeProperty);
     }
-#endif
 
     [TestMethod]
     public void TestMissingNonNullablePropertyNestedInInterface()
