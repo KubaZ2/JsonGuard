@@ -50,9 +50,9 @@ Additionally, JsonGuard suppresses nullability warnings for validated properties
 
 ## Compatibility
 
-- **C#**: 11 or later
-- **System.Text.Json**: 6.0.0 or later
-- **.NET**: .NET 6.0 or later, .NET Framework 4.6.2 or later, .NET Standard 2.0 or later
+- **C#:** 11+
+- **System.Text.Json:** 6.0.0+
+- **.NET:** Any that supports System.Text.Json 6.0.0+, including .NET 5.0+, .NET Core 2.0+, .NET Framework 4.6.1+, and .NET Standard 2.0+
 
 ## Installation
 
@@ -80,12 +80,12 @@ dotnet add package JsonGuard
 The source code of benchmarks can be found in the [JsonGuard.Benchmarks](https://github.com/KubaZ2/JsonGuard/blob/main/JsonGuard.Benchmarks) directory.
 
 The benchmarks evaluate performance across two runtimes (JIT and Native AOT) using two distinct workloads:
-- **Complex Scenario**: A large JSON document (a large Discord guild payload).
-- **Simple Scenario**: A small JSON document (basic user information).
+- **Complex Scenario:** A large JSON document (a large Discord guild payload).
+- **Simple Scenario:** A small JSON document (basic user information).
 
 > [!NOTE]
-> - JIT: The results include both reflection-based and source-generated deserialization.
-> - Native AOT: The results include only source-generated deserialization, as Native AOT inherently lacks support for reflection-based deserialization.
+> - **JIT:** The results include both reflection-based and source-generated deserialization.
+> - **Native AOT:** The results include only source-generated deserialization, as Native AOT inherently lacks support for reflection-based deserialization.
 
 ### JIT
 
